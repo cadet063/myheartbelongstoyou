@@ -30,7 +30,6 @@
             font-size: 2.5em;
             color: #7e003c;
             margin-bottom: 1em;
-            animation: fadeIn 2s ease-out forwards;
             text-align: center;
             padding: 0 0.5em;
             z-index: 2;
@@ -54,13 +53,11 @@
             font-style: italic;
             font-size: 1.2em;
             margin-bottom: 1.5em;
-            opacity: 1;
         }
 
         .line {
             margin-top: 1em;
             font-size: 1.05em;
-            opacity: 1;
         }
 
         button {
@@ -123,21 +120,9 @@
         .love-emoji {
             position: absolute;
             font-size: 1.5em;
-            animation: floatLove 8s linear forwards;
             user-select: none;
             opacity: 0.8;
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            animation-fill-mode: forwards;
         }
 
         @keyframes zoomIn {
@@ -161,6 +146,24 @@
             100% {
                 transform: translateY(-110vh) scale(1.5);
                 opacity: 0;
+            }
+        }
+
+        /* Word by word animation styles */
+        .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation-fill-mode: forwards;
+            animation-name: wordFadeUp;
+            animation-duration: 0.5s;
+            animation-timing-function: ease-out;
+        }
+
+        @keyframes wordFadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
@@ -206,10 +209,16 @@
             emoji.innerText = loveEmojis[Math.floor(Math.random() * loveEmojis.length)];
             emoji.style.left = Math.random() * 100 + 'vw';
             emoji.style.bottom = '-30px';
-            emoji.style.fontSize = `${Math.random() * 24 + 16}px`;
-            emoji.style.animationDuration = `${Math.random() * 4 + 6}s`;
+            emoji.style.fontSize = (Math.random() * 24 + 16) + 'px';
+
+            // Animate floatLove with random duration
+            const duration = (Math.random() * 4 + 6).toFixed(2) + 's';
+            emoji.style.animation = `floatLove ${duration} linear forwards`;
+
             floatingLoveContainer.appendChild(emoji);
-            setTimeout(() => emoji.remove(), 10000);
+
+            // Remove emoji after animation ends
+            setTimeout(() => emoji.remove(), (parseFloat(duration) * 1000) + 500);
         }, 150);
 
         // YouTube Player API setup
@@ -229,7 +238,7 @@
                 width: '0',
                 videoId: 'suUZbb3zYw8',
                 playerVars: {
-                    start: 230,       // start at 3:50 (230 seconds)
+                    start: 225,       // start at 3:45 (225 seconds)
                     controls: 0,
                     disablekb: 1,
                     modestbranding: 1,
@@ -247,11 +256,10 @@
         }
 
         function onPlayerReady(event) {
-            // Player is ready, but don't auto-play
+            // Player ready, no autoplay
         }
 
         function onPlayerStateChange(event) {
-            // Stop playing when video ends
             if (event.data === YT.PlayerState.ENDED) {
                 player.stopVideo();
             }
@@ -263,6 +271,33 @@
                 musicStarted = true;
             }
             popup.classList.add('show');
+        });
+
+        // Word-by-word fade-up animation function
+        function animateTextWordByWord(selector, delayBetween = 200) {
+            const elements = document.querySelectorAll(selector);
+
+            elements.forEach(el => {
+                const text = el.innerText.trim();
+                const words = text.split(/\s+/);
+
+                // Clear original text
+                el.innerHTML = '';
+
+                words.forEach((word, i) => {
+                    const span = document.createElement('span');
+                    span.className = 'word';
+                    span.textContent = word + (i !== words.length - 1 ? ' ' : ''); // add space except last word
+                    span.style.animationDelay = `${i * delayBetween}ms`;
+                    el.appendChild(span);
+                });
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            animateTextWordByWord('h1', 250);      // heading words
+            animateTextWordByWord('.quote', 180);  // quote words
+            animateTextWordByWord('.line', 150);   // lines words
         });
     </script>
 </body>
