@@ -2,297 +2,320 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>My Heart Belongs to you Pudki 💖</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Heart Belongs to you Pudki 💖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-  font-family: 'Courier New', monospace;
-  background: linear-gradient(to right, #ffecd2, #fcb69f);
-  color: #5c0036;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  padding: 3em 1em 6em;
-  position: relative;
-  overflow-y: auto; /* <-- allows vertical scrolling */
-}
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(to right, #ffecd2, #fcb69f);
+            color: #5c0036;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
 
+        .main-content {
+            overflow: hidden;
+            width: 100%;
+            height: 100vh;
+            padding: 1em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-    h1 {
-      font-size: 2.5em;
-      color: #7e003c;
-      margin-bottom: 1em;
-      text-align: center;
-      padding: 0 0.5em;
-      z-index: 2;
-      position: relative;
-    }
+        h1 {
+            font-size: 2em;
+            color: #7e003c;
+            margin-bottom: 1em;
+            text-align: center;
+            padding: 0 0.5em;
+            z-index: 2;
+            position: relative;
+        }
 
-    .card {
-      background: rgba(255, 255, 255, 0.8);
-      border-radius: 20px;
-      padding: 2em;
-      max-width: 600px;
-      width: 100%;
-      box-shadow: 0 10px 30px rgba(255, 102, 153, 0.3);
-      animation: zoomIn 1.5s ease;
-      z-index: 2;
-      text-align: center;
-      position: relative;
-    }
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 1.2em;
+            width: 90vw;
+            max-width: 500px;
+            max-height: 65vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(255, 102, 153, 0.3);
+            animation: zoomIn 1.5s ease;
+            z-index: 2;
+            text-align: center;
+            position: relative;
+        }
 
-    .quote {
-      font-style: italic;
-      font-size: 1.2em;
-      margin-bottom: 1.5em;
-    }
+        .quote {
+            font-style: italic;
+            font-size: 1.1em;
+            margin-bottom: 1em;
+        }
 
-    .line {
-      margin-top: 1em;
-      font-size: 1.05em;
-    }
+        .line {
+            margin-top: 0.5em;
+            font-size: 1em;
+        }
 
-    button {
-      margin-top: 2em;
-      background: #ff6392;
-      color: #fff;
-      border: none;
-      padding: 0.8em 2em;
-      font-size: 1.1em;
-      border-radius: 30px;
-      box-shadow: 0 0 10px #ff95c5;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.3s ease;
-      z-index: 2;
-      max-width: 320px;
-      width: 100%;
-      min-width: 160px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      position: relative;
-    }
+        button {
+            margin-top: 1.2em;
+            background: #ff6392;
+            color: #fff;
+            border: none;
+            padding: 0.6em 1.5em;
+            font-size: 1em;
+            border-radius: 30px;
+            box-shadow: 0 0 10px #ff95c5;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            z-index: 2;
+            width: 100%;
+            max-width: 240px;
+            position: relative;
+        }
 
-    button:hover {
-      background: #d93670;
-      transform: scale(1.05);
-    }
+        button:hover {
+            background: #d93670;
+            transform: scale(1.05);
+        }
 
-    .popup {
-      position: fixed;
-      bottom: -100%;
-      left: 0;
-      right: 0;
-      background: #ff85a2;
-      color: #fff;
-      font-size: 1em;
-      padding: 1em;
-      text-align: center;
-      border-top-left-radius: 25px;
-      border-top-right-radius: 25px;
-      transition: bottom 0.5s ease;
-      z-index: 3;
-    }
+        .popup {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            right: 0;
+            background: #ff85a2;
+            color: #fff;
+            font-size: 1em;
+            padding: 1em;
+            text-align: center;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            transition: bottom 0.5s ease;
+            z-index: 3;
+        }
 
-    .popup.show {
-      bottom: 0;
-    }
+        .popup.show {
+            bottom: 0;
+        }
 
-    .floating-love {
-      position: fixed;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      overflow: visible;
-      z-index: 1;
-    }
+        .floating-love {
+            position: fixed;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: visible;
+            z-index: 1;
+        }
 
-    .love-emoji {
-      position: absolute;
-      font-size: 1.5em;
-      user-select: none;
-      opacity: 0.8;
-      animation-fill-mode: forwards;
-    }
+        .love-emoji {
+            position: absolute;
+            font-size: 1.5em;
+            user-select: none;
+            opacity: 0.8;
+            animation-fill-mode: forwards;
+        }
 
-    @keyframes zoomIn {
-      0% {
-        transform: scale(0.9);
-        opacity: 0;
-      }
+        @keyframes zoomIn {
+            0% {
+                transform: scale(0.9);
+                opacity: 0;
+            }
 
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
 
-    @keyframes floatLove {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 0.8;
-      }
+        @keyframes floatLove {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.8;
+            }
 
-      100% {
-        transform: translateY(-110vh) scale(1.5);
-        opacity: 0;
-      }
-    }
+            100% {
+                transform: translateY(-110vh) scale(1.5);
+                opacity: 0;
+            }
+        }
 
-    .word {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(20px);
-      animation-fill-mode: forwards;
-      animation-name: wordFadeUp;
-      animation-duration: 0.5s;
-      animation-timing-function: ease-out;
-    }
+        .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation-fill-mode: forwards;
+            animation-name: wordFadeUp;
+            animation-duration: 0.5s;
+            animation-timing-function: ease-out;
+        }
 
-    @keyframes wordFadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+        @keyframes wordFadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 1.4em;
+            }
+
+            .quote,
+            .line {
+                font-size: 0.95em;
+            }
+
+            button {
+                font-size: 0.95em;
+                padding: 0.5em 1em;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <h1>Endless Love For You, Pudki 💞</h1>
+    <div class="floating-love" id="floatingLove"></div>
 
-  <div class="card">
-    <div class="quote">You don’t just hold my hand, Pudki — you hold my whole heart.</div>
-    <div class="line">When I wake up, I think of you first.</div>
-    <div class="line">When I sleep, you’re the last thought in my mind.</div>
-    <div class="line">You’ve filled the silent parts of my soul with laughter and love.</div>
-    <div class="line">Every moment with you feels like a scene from a beautiful love story.</div>
-    <div class="line">I’ll keep loving you, even in the quietest seconds. 🌙</div>
+    <div class="main-content">
+        <h1>Endless Love For You, Pudki 💞</h1>
 
-    <button id="loveBtn">Tap to feel my love 💗</button>
-  </div>
+        <div class="card">
+            <div class="quote">You don’t just hold my hand, Pudki — you hold my whole heart.</div>
+            <div class="line">When I wake up, I think of you first.</div>
+            <div class="line">When I sleep, you’re the last thought in my mind.</div>
+            <div class="line">You’ve filled the silent parts of my soul with laughter and love.</div>
+            <div class="line">Every moment with you feels like a scene from a beautiful love story.</div>
+            <div class="line">I’ll keep loving you, even in the quietest seconds. 🌙</div>
 
-  <div class="popup" id="popup">
-    Pudki, no matter what life brings — my heart will always belong to you. You're my once in a lifetime. 💍
-  </div>
+            <button id="loveBtn">Tap to feel my love 💗</button>
+        </div>
+    </div>
 
-  <div class="floating-love" id="floatingLove"></div>
+    <div class="popup" id="popup">
+        Pudki, no matter what life brings — my heart will always belong to you. You're my once in a lifetime. 💍
+    </div>
 
-  <div style="display:none;">
-    <div id="player"></div>
-  </div>
+    <div style="display:none;">
+        <div id="player"></div>
+    </div>
 
-  <script>
-    const floatingLoveContainer = document.getElementById('floatingLove');
-    const btn = document.getElementById('loveBtn');
-    const popup = document.getElementById('popup');
+    <script>
+        const floatingLoveContainer = document.getElementById('floatingLove');
+        const btn = document.getElementById('loveBtn');
+        const popup = document.getElementById('popup');
 
-    const loveEmojis = ['💗', '💖', '💘', '💝', '💞', '💕', '❤️', '❣️', '💓'];
+        const loveEmojis = ['💗', '💖', '💘', '💝', '💞', '💕', '❤️', '❣️', '💓'];
 
-    setInterval(() => {
-      const emoji = document.createElement('div');
-      emoji.className = 'love-emoji';
-      emoji.innerText = loveEmojis[Math.floor(Math.random() * loveEmojis.length)];
-      emoji.style.left = Math.random() * 100 + 'vw';
-      emoji.style.bottom = '-30px';
-      emoji.style.fontSize = (Math.random() * 24 + 16) + 'px';
+        setInterval(() => {
+            const emoji = document.createElement('div');
+            emoji.className = 'love-emoji';
+            emoji.innerText = loveEmojis[Math.floor(Math.random() * loveEmojis.length)];
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.bottom = '-30px';
+            emoji.style.fontSize = (Math.random() * 24 + 16) + 'px';
 
-      const duration = (Math.random() * 4 + 6).toFixed(2) + 's';
-      emoji.style.animation = `floatLove ${duration} linear forwards`;
+            const duration = (Math.random() * 4 + 6).toFixed(2) + 's';
+            emoji.style.animation = `floatLove ${duration} linear forwards`;
 
-      floatingLoveContainer.appendChild(emoji);
+            floatingLoveContainer.appendChild(emoji);
 
-      setTimeout(() => emoji.remove(), (parseFloat(duration) * 1000) + 500);
-    }, 150);
+            setTimeout(() => emoji.remove(), (parseFloat(duration) * 1000) + 500);
+        }, 150);
 
-    let player;
-    let musicStarted = false;
+        let player;
+        let musicStarted = false;
 
-    let tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    let firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        let tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        let firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('player', {
-        height: '0',
-        width: '0',
-        videoId: 'suUZbb3zYw8',
-        playerVars: {
-          start: 225,
-          controls: 0,
-          disablekb: 1,
-          modestbranding: 1,
-          rel: 0,
-          autoplay: 0,
-          loop: 0,
-          fs: 0,
-          iv_load_policy: 3
-        },
-        events: {
-          'onReady': () => { },
-          'onStateChange': event => {
-            if (event.data === YT.PlayerState.ENDED) {
-              player.stopVideo();
-            }
-          }
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0',
+                width: '0',
+                videoId: 'suUZbb3zYw8',
+                playerVars: {
+                    start: 225,
+                    controls: 0,
+                    disablekb: 1,
+                    modestbranding: 1,
+                    rel: 0,
+                    autoplay: 0,
+                    loop: 0,
+                    fs: 0,
+                    iv_load_policy: 3
+                },
+                events: {
+                    'onReady': () => { },
+                    'onStateChange': event => {
+                        if (event.data === YT.PlayerState.ENDED) {
+                            player.stopVideo();
+                        }
+                    }
+                }
+            });
         }
-      });
-    }
 
-    btn.addEventListener('click', () => {
-      if (!musicStarted && player && player.playVideo) {
-        player.playVideo();
-        musicStarted = true;
-      }
-      popup.classList.add('show');
-    });
-
-    function animateTextWordByWord(selector, delayBetween = 200) {
-      const elements = document.querySelectorAll(selector);
-      elements.forEach(el => {
-        const originalHTML = el.innerHTML;
-        const tempDiv = document.createElement("div");
-        tempDiv.innerHTML = originalHTML;
-
-        const text = tempDiv.textContent.replace(/\s+/g, ' ').trim();
-        const words = text.split(' ');
-
-        el.innerHTML = ''; // clear element
-
-        words.forEach((word, i) => {
-          const span = document.createElement('span');
-          span.className = 'word';
-          span.textContent = word;
-          span.style.animationDelay = `${i * delayBetween}ms`;
-          el.appendChild(span);
-
-          // Add a space after each word
-          if (i !== words.length - 1) {
-            el.appendChild(document.createTextNode(' '));
-          }
+        btn.addEventListener('click', () => {
+            if (!musicStarted && player && player.playVideo) {
+                player.playVideo();
+                musicStarted = true;
+            }
+            popup.classList.add('show');
         });
-      });
-    }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      animateTextWordByWord('h1', 250);
-      animateTextWordByWord('.quote', 180);
-      animateTextWordByWord('.line', 150);
-    });
-  </script>
+        function animateTextWordByWord(selector, delayBetween = 200) {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(el => {
+                const originalHTML = el.innerHTML;
+                const tempDiv = document.createElement("div");
+                tempDiv.innerHTML = originalHTML;
+
+                const text = tempDiv.textContent.replace(/\s+/g, ' ').trim();
+                const words = text.split(' ');
+
+                el.innerHTML = ''; // clear element
+
+                words.forEach((word, i) => {
+                    const span = document.createElement('span');
+                    span.className = 'word';
+                    span.textContent = word;
+                    span.style.animationDelay = `${i * delayBetween}ms`;
+                    el.appendChild(span);
+
+                    // Add a space after each word
+                    if (i !== words.length - 1) {
+                        el.appendChild(document.createTextNode(' '));
+                    }
+                });
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            animateTextWordByWord('h1', 250);
+            animateTextWordByWord('.quote', 180);
+            animateTextWordByWord('.line', 150);
+        });
+    </script>
 </body>
 
 </html>
-
